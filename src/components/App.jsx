@@ -24,6 +24,10 @@ function App() {
     fetchToysData();
   }, [])
 
+  function addToy(newToy){
+    setToys(prev => [...prev,newToy])
+  }
+
   function handleClick() {
     setShowForm((showForm) => !showForm);
   }
@@ -31,7 +35,7 @@ function App() {
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm onAddToy={addToy}/> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
