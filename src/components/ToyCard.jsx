@@ -1,6 +1,13 @@
 import React from "react";
+import {useState} from 'react'
 
 function ToyCard({toy, onDeleteToy}) {
+  const [likesCounter, setLikesCounter] = useState(toy.likes);
+
+  function handleLikes(){
+    setLikesCounter(prev => prev + 1)
+  }
+
   function handleDonation(){
     const deleteToy = () => {
       fetch(`http://localhost:3001/toys/${toy.id}`, {
@@ -22,8 +29,8 @@ function ToyCard({toy, onDeleteToy}) {
         alt={toy.name}
         className="toy-avatar"
       />
-      <p>{toy.likes} Likes </p>
-      <button className="like-btn">Like {"<3"}</button>
+      <p>{likesCounter} Likes </p>
+      <button className="like-btn" onClick={handleLikes}>Like {"<3"}</button>
       <button className="del-btn" onClick={handleDonation}>Donate to GoodWill</button>
     </div>
   );
